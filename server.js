@@ -9,12 +9,6 @@ const cors = require('koa2-cors')
 const app = new Koa()
 const router = new Router()
 
-// 第三方中间件
-app.use(bodyParser()) // post 请求，数据解析
-app.use(koaStatic(path.resolve(__dirname, './dist'))) // 处理静态资源，前端build好的目录
-router.use('/api/', require('./routers')) // 路由
-app.use(router.routes()).use(router.allowedMethods())
-
 /* 
     CORS 跨域
     - https://github.com/zadzbw/koa2-cors
@@ -29,8 +23,14 @@ app.use(cors({
     maxAge: 5,
     allowMethods: ['GET', 'POST', 'DELETE'],
     allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'h'],
-}));
+}))
+
+// 第三方中间件
+app.use(bodyParser()) // post 请求，数据解析
+app.use(koaStatic(path.resolve(__dirname, './dist'))) // 处理静态资源，前端build好的目录
+router.use('/api/', require('./routers')) // 路由
+app.use(router.routes()).use(router.allowedMethods())
 
 // 监听端口
 app.listen(config.PORT)
-console.log(`Starting at ${config.PORT}`)
+console.log(`[server] is Starting at ${config.PORT}`)

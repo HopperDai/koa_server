@@ -35,7 +35,7 @@ const Request = (url, data) => {
 // 调用
 (async () => {
     let data = await Request(
-        'http://localhost:8089/api/aaa', {
+        'http://localhost:8089/api/jsonp', {
             name: 'hopper',
             password: 123456,
             age: 18

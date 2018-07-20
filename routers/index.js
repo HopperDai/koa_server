@@ -6,7 +6,7 @@ const {
     jsonp
 } = require('../libs/crossdomain')
 
-router.get('aaa', async (ctx, next) => {
+router.get('jsonp', async (ctx, next) => {
     jsonp(ctx)
 })
 
